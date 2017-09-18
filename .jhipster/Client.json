@@ -1,0 +1,25 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nomComplet",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresse",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "civilite",
+            "fieldType": "String",
+            "fieldValues": "M,Mlle,Mme"
+        }
+    ],
+    "changelogDate": "20170918174056",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "client",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

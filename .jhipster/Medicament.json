@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "familleMedicament",
+            "otherEntityName": "familleMedicament",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "code"
+        },
+        {
+            "relationshipName": "stock",
+            "otherEntityName": "stock",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "libelle",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "medicament"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "libelle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prix",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170918172427",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "medicament",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

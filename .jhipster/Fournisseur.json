@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nomComplet",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresse",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170918173439",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "fournisseur",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

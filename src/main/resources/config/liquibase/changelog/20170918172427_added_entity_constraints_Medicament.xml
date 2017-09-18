@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Medicament.
+    -->
+    <changeSet id="20170918172427-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="famille_medicament_id"
+                                 baseTableName="medicament"
+                                 constraintName="fk_medicament_famille_medicament_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="famille_medicament"/>
+
+        <addForeignKeyConstraint baseColumnNames="medicaments_id"
+                                 baseTableName="medicament_stock"
+                                 constraintName="fk_medicament_stock_medicaments_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="medicament"/>
+        <addForeignKeyConstraint baseColumnNames="stocks_id"
+                                 baseTableName="medicament_stock"
+                                 constraintName="fk_medicament_stock_stocks_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stock"/>
+        
+    </changeSet>
+</databaseChangeLog>

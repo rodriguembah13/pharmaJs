@@ -1,0 +1,24 @@
+{
+    "pharmaApp": {
+        "ligneVente" : {
+            "home": {
+                "title": "LigneVentes",
+                "createLabel": "Créer un nouveau Ligne Vente",
+                "createOrEditLabel": "Créer ou éditer un Ligne Vente"
+            },
+            "created": "Un nouveau Ligne Vente a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Ligne Vente avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Ligne Vente avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Ligne Vente {{ id }} ?"
+            },
+            "detail": {
+                "title": "Ligne Vente"
+            },
+            "quantite": "Quantite",
+            "prix": "Prix",
+            "medicament": "Medicament",
+            "vente": "Vente"
+        }
+    }
+}

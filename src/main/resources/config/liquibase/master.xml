@@ -5,6 +5,16 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918172427_added_entity_Medicament.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918172831_added_entity_FamilleMedicament.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918173134_added_entity_LigneVente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918173439_added_entity_Fournisseur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918173645_added_entity_Stock.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918174056_added_entity_Client.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918185012_added_entity_Vente.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20170918172427_added_entity_constraints_Medicament.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918173134_added_entity_constraints_LigneVente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170918185012_added_entity_constraints_Vente.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

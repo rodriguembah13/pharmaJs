@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "client",
+            "otherEntityName": "client",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "ligneVente",
+            "otherEntityName": "ligneVente",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "vente"
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "vente"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date_vente",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "prix",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "total",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170918185012",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "vente",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pager"
+}

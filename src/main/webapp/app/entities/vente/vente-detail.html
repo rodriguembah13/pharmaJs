@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="pharmaApp.vente.detail.title">Vente</span> {{vm.vente.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="pharmaApp.vente.date_vente">Date Vente</span></dt>
+        <dd>
+            <span>{{vm.vente.date_vente | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="pharmaApp.vente.prix">Prix</span></dt>
+        <dd>
+            <span>{{vm.vente.prix}}</span>
+        </dd>
+        <dt><span data-translate="pharmaApp.vente.total">Total</span></dt>
+        <dd>
+            <span>{{vm.vente.total}}</span>
+        </dd>
+        <dt><span data-translate="pharmaApp.vente.client">Client</span></dt>
+        <dd>
+            <a ui-sref="client-detail({id:vm.vente.client.id})">{{vm.vente.client.id}}</a>
+        </dd>
+        <dt><span data-translate="pharmaApp.vente.user">User</span></dt>
+        <dd>
+            {{vm.vente.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="vente-detail.edit({id:vm.vente.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

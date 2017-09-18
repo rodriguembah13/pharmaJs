@@ -1,0 +1,23 @@
+{
+    "pharmaApp": {
+        "familleMedicament" : {
+            "home": {
+                "title": "FamilleMedicaments",
+                "createLabel": "Créer un nouveau Famille Medicament",
+                "createOrEditLabel": "Créer ou éditer un Famille Medicament"
+            },
+            "created": "Un nouveau Famille Medicament a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Famille Medicament avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Famille Medicament avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Famille Medicament {{ id }} ?"
+            },
+            "detail": {
+                "title": "Famille Medicament"
+            },
+            "designation": "Designation",
+            "description": "Description",
+            "code": "Code"
+        }
+    }
+}

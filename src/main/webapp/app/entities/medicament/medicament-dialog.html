@@ -1,0 +1,76 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myMedicamentLabel" data-translate="pharmaApp.medicament.home.createOrEditLabel">Create or edit a Medicament</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.medicament.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.medicament.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pharmaApp.medicament.libelle" for="field_libelle">Libelle</label>
+            <input type="text" class="form-control" name="libelle" id="field_libelle"
+                    ng-model="vm.medicament.libelle"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pharmaApp.medicament.prix" for="field_prix">Prix</label>
+            <input type="number" class="form-control" name="prix" id="field_prix"
+                    ng-model="vm.medicament.prix"
+                    />
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setImage($file, vm.medicament)">
+            <label class="control-label" data-translate="pharmaApp.medicament.image" for="field_image">Image</label>
+            <div>
+                <div ng-if="vm.medicament.image" class="help-block clearfix">
+                    <a class="pull-left" ng-click="vm.openFile(vm.medicament.imageContentType, vm.medicament.image)" data-translate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{vm.medicament.imageContentType}}, {{vm.byteSize(vm.medicament.image)}}</span>
+                    <button type="button" ng-click="vm.medicament.image=null;vm.medicament.imageContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setImage($file, vm.medicament)" data-translate="entity.action.addblob">
+                    Add blob
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="image" id="field_image"
+                    ng-model="vm.medicament.image"
+                    />
+            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                    ng-model="vm.medicament.imageContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pharmaApp.medicament.code" for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                    ng-model="vm.medicament.code"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="pharmaApp.medicament.familleMedicament" for="field_familleMedicament">Famille Medicament</label>
+            <select class="form-control" id="field_familleMedicament" name="familleMedicament" ng-model="vm.medicament.familleMedicament" ng-options="familleMedicament as familleMedicament.code for familleMedicament in vm.famillemedicaments track by familleMedicament.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="pharmaApp.medicament.stock" for="field_stock">Stock</label>
+            <select class="form-control" id="field_stock" multiple name="stock" ng-model="vm.medicament.stocks" ng-options="stock as stock.libelle for stock in vm.stocks track by stock.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

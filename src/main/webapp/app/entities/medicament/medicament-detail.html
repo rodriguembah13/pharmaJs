@@ -1,0 +1,48 @@
+
+<div>
+    <h2><span data-translate="pharmaApp.medicament.detail.title">Medicament</span> {{vm.medicament.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="pharmaApp.medicament.libelle">Libelle</span></dt>
+        <dd>
+            <span>{{vm.medicament.libelle}}</span>
+        </dd>
+        <dt><span data-translate="pharmaApp.medicament.prix">Prix</span></dt>
+        <dd>
+            <span>{{vm.medicament.prix}}</span>
+        </dd>
+        <dt><span data-translate="pharmaApp.medicament.image">Image</span></dt>
+        <dd>
+            <div ng-if="vm.medicament.image">
+                <a ng-click="vm.openFile(vm.medicament.imageContentType, vm.medicament.image)" data-translate="entity.action.open">open</a>
+                {{vm.medicament.imageContentType}}, {{vm.byteSize(vm.medicament.image)}}
+            </div>
+        </dd>
+        <dt><span data-translate="pharmaApp.medicament.code">Code</span></dt>
+        <dd>
+            <span>{{vm.medicament.code}}</span>
+        </dd>
+        <dt><span data-translate="pharmaApp.medicament.familleMedicament">Famille Medicament</span></dt>
+        <dd>
+            <a ui-sref="famille-medicament-detail({id:vm.medicament.familleMedicament.id})">{{vm.medicament.familleMedicament.code}}</a>
+        </dd>
+        <dt><span data-translate="pharmaApp.medicament.stock">Stock</span></dt>
+        <dd>
+            <span ng-repeat="stock in vm.medicament.stocks">
+                <a ui-sref="stock-detail({id: stock.id})">{{stock.libelle}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="medicament-detail.edit({id:vm.medicament.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

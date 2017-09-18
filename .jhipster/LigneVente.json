@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "medicament",
+            "otherEntityName": "medicament",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "code"
+        },
+        {
+            "relationshipName": "vente",
+            "otherEntityName": "vente",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "quantite",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "prix",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20170918173134",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "ligne_vente",
+    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll"
+}

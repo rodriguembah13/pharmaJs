@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "designation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170918172831",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "famille_medicament",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

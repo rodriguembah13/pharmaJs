@@ -42,6 +42,16 @@ public class CacheConfiguration {
             cm.createCache(com.ballack.com.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.ballack.com.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.ballack.com.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.Medicament.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.FamilleMedicament.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.LigneVente.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.Fournisseur.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.Stock.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.Client.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.Medicament.class.getName() + ".stocks", jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.Stock.class.getName() + ".medicaments", jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.Vente.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.Vente.class.getName() + ".ligneVentes", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
