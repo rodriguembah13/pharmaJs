@@ -18,7 +18,6 @@
         vm.itemsPerPage = paginationConstants.itemsPerPage;
 
         loadAll();
-
         function loadAll () {
             Client.query({
                 page: pagingParams.page - 1,
