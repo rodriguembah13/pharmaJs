@@ -33,12 +33,6 @@ public class PanierResource {
     @Timed
     public void addPanier(@PathVariable Long id,@PathVariable int qte) {
         Medicament medicament=medicamentRepository.findOne(id);
-        for (Stock st:medicament.getStocks()){
-            System.out.println(st.getLibelle());
-            if (st.getQuantite()>=qte){
-                panier.addMedicament(medicament,qte);
-            }
-        }
 
         }
     @GetMapping("/viewPanier")
