@@ -10,8 +10,8 @@
         {
             "relationshipName": "stock",
             "otherEntityName": "stock",
-            "relationshipType": "many-to-many",
-            "otherEntityField": "libelle",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "medicament"
         }

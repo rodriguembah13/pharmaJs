@@ -1,94 +1,97 @@
-<!-- <button class="btn" ng-click="addNew()">add new</button>
-  <accordion>
-    <accordion-group ng-repeat="group in groups" heading="{{group.title}}" is-open="group.open">
-      {{group.content}}
-    </accordion-group>    
-  </accordion>
-  <button class="btn" ng-click="groups[0].open = !groups[0].open">Toggle first open</button>
-  <button class="btn" ng-click="groups[1].open = !groups[1].open">Toggle second open</button> -->
-<ul class="">
-                <li ui-sref-active="active">
-                    <a ui-sref="home">
-                        <span class="glyphicon glyphicon-home"></span>
-                        <span class="hidden-sm" data-translate="global.menu.home">Home</span>
+<uib-accordion>
+    <div uib-accordion-group class="panel-default" has-authority="ROLE_ADMIN">
+      <uib-accordion-heading>
+            <a href="" id="entity-menu">
+                        <span>
+                            <span class="glyphicon glyphicon-dashboard"></span>
+                            <span class="hidden-sm">
+                               DASHBORD
+                            </span>
+                            <b class="caret"></b>
+                        </span>
                     </a>
-                </li>
-</ul>
-        <div class="panel-group" id="accordion">
-          <div has-authority="ROLE_ADMIN" class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                  <i class="fa fa-home"></i>Caisse<span class="fa fa-chevron-down"></span></a>
-              </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse in">
-              <ul class="nav child_menu">
-                <li><a routerLink="" class=" active" role="button" routerLinkActive="active">Home</a></li>
-                <li><a href="form.html">Mes Ventes</a></li>
-                <li><a href="form_advanced.html">Ventes</a></li>
-                <li><a href="form_validation.html">Stock</a></li>
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      </uib-accordion-heading>
+      This is just some content to illustrate fancy headings.
+    </div>
+        <div uib-accordion-group class="panel-default" is-open="status.open">
+      <uib-accordion-heading>
+       <a href="" id="entity-menu">
+                        <span>
+                            <span class="glyphicon glyphicon-credit-card"></span>
+                            <span class="hidden-sm">
+                                CAISSE
+                            </span>
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      </uib-accordion-heading>
+       <ul class="list-group">
+                <li class="list-group-item"><a ui-sref="caisse" class="active">
+                <span class="glyphicon glyphicon-home"></span>Home</a></li>
+                <li class="list-group-item"><a href="form.html">
+                <span class="glyphicon glyphicon-bell"></span>Mes Ventes</a></li>
+                <li class="list-group-item"><a href="form_advanced.html">Ventes</a></li>
+                <li class="list-group-item"><a href="form_validation.html">Stock</a></li>
               </ul>
-            </div>
-          </div> 
-            <div has-authority="ROLE_ADMIN" class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                  <i class="fa fa-home"></i>ADMIN<span class="fa fa-chevron-down"></span></a>
-              </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse in">
-              <ul class="nav child_menu">
-                <li><a routerLink="" class=" active" role="button" routerLinkActive="active">Home</a></li>
-                <li><a href="form.html">Mes Ventes</a></li>
-                <li><a href="form_advanced.html">Ventes</a></li>
-                <li><a href="form_validation.html">Stock</a></li>
-              </ul>
-            </div>
-          </div>
-          </div>
-           <div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-        Collapsible Group 1</a>
-      </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse in">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
+    <div uib-accordion-group class="panel-default" has-authority="ROLE_ADMIN">
+      <uib-accordion-heading>
+        <a href="" id="entity-menu">
+                        <span>
+                            <span class="glyphicon glyphicon-th-list"></span>
+                            <span class="hidden-sm" data-translate="global.menu.entities.main">
+                                Entities
+                            </span>
+                            <b class="caret"></b>
+                        </span>
+                    </a><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      </uib-accordion-heading>
+      <ul class="list-inline">
+                        <li ui-sref-active="active">
+                                <a ui-sref="medicament" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.medicament">Medicament</span>
+                                </a>
+                            </li>
+                        <li ui-sref-active="active">
+                                <a ui-sref="famille-medicament" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.familleMedicament">Famille Medicament</span>
+                                </a>
+                            </li>
+                        <li ui-sref-active="active">
+                                <a ui-sref="ligne-vente" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.ligneVente">Ligne Vente</span>
+                                </a>
+                            </li>
+                        <li ui-sref-active="active">
+                                <a ui-sref="fournisseur" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.fournisseur">Fournisseur</span>
+                                </a>
+                            </li>
+                        <li ui-sref-active="active">
+                                <a ui-sref="stock" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.stock">Stock</span>
+                                </a>
+                            </li>
+                          <li ui-sref-active="active">
+                                <a ui-sref="client" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.client">Client</span>
+                                </a>
+                            </li>
+                        <li ui-sref-active="active">
+                                <a ui-sref="vente" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.vente">Vente</span>
+                                </a>
+                            </li>
+                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                    </ul>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-        Collapsible Group 2</a>
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-        Collapsible Group 3</a>
-      </h4>
-    </div>
-    <div id="collapse3" class="panel-collapse collapse">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
-    </div>
-  </div>
-</div> 
+  </uib-accordion>

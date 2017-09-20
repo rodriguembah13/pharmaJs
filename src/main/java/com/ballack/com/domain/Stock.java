@@ -6,8 +6,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -33,10 +31,9 @@ public class Stock implements Serializable {
     @Column(name = "libelle")
     private String libelle;
 
-    @ManyToMany(mappedBy = "stocks")
+    @OneToOne(mappedBy = "stock")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Medicament> medicaments = new HashSet<>();
+    private Medicament medicament;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -86,29 +83,17 @@ public class Stock implements Serializable {
         this.libelle = libelle;
     }
 
-    public Set<Medicament> getMedicaments() {
-        return medicaments;
+    public Medicament getMedicament() {
+        return medicament;
     }
 
-    public Stock medicaments(Set<Medicament> medicaments) {
-        this.medicaments = medicaments;
+    public Stock medicament(Medicament medicament) {
+        this.medicament = medicament;
         return this;
     }
 
-    public Stock addMedicament(Medicament medicament) {
-        this.medicaments.add(medicament);
-        medicament.getStocks().add(this);
-        return this;
-    }
-
-    public Stock removeMedicament(Medicament medicament) {
-        this.medicaments.remove(medicament);
-        medicament.getStocks().remove(this);
-        return this;
-    }
-
-    public void setMedicaments(Set<Medicament> medicaments) {
-        this.medicaments = medicaments;
+    public void setMedicament(Medicament medicament) {
+        this.medicament = medicament;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

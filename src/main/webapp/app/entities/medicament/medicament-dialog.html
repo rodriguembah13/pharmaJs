@@ -62,7 +62,9 @@
         </div>
         <div class="form-group">
             <label data-translate="pharmaApp.medicament.stock" for="field_stock">Stock</label>
-            <select class="form-control" id="field_stock" multiple name="stock" ng-model="vm.medicament.stocks" ng-options="stock as stock.libelle for stock in vm.stocks track by stock.id"></select>
+            <select class="form-control" id="field_stock" name="stock" ng-model="vm.medicament.stock" ng-options="stock as stock.id for stock in vm.stocks | orderBy:'id' track by stock.id">
+                <option value=""></option>
+            </select>
         </div>
     </div>
     <div class="modal-footer">

@@ -5,9 +5,9 @@
         .module('pharmaApp')
         .controller('MedicamentDialogController', MedicamentDialogController);
 
-    MedicamentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Medicament', 'FamilleMedicament', 'Stock'];
+    MedicamentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'DataUtils', 'entity', 'Medicament', 'FamilleMedicament', 'Stock'];
 
-    function MedicamentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Medicament, FamilleMedicament, Stock) {
+    function MedicamentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, DataUtils, entity, Medicament, FamilleMedicament, Stock) {
         var vm = this;
 
         vm.medicament = entity;
@@ -16,7 +16,15 @@
         vm.openFile = DataUtils.openFile;
         vm.save = save;
         vm.famillemedicaments = FamilleMedicament.query();
-        vm.stocks = Stock.query();
+        vm.stocks = Stock.query({filter: 'medicament-is-null'});
+        $q.all([vm.medicament.$promise, vm.stocks.$promise]).then(function() {
+            if (!vm.medicament.stock || !vm.medicament.stock.id) {
+                return $q.reject();
+            }
+            return Stock.get({id : vm.medicament.stock.id}).$promise;
+        }).then(function(stock) {
+            vm.stocks.push(stock);
+        });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

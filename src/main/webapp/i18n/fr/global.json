@@ -96,7 +96,9 @@
             "delete": "Supprimer",
             "open": "Ouvrir",
             "save": "Sauvegarder",
-            "view": "Voir"
+            "view": "Voir",
+            "addPanier": "Ajouter",
+            "titre": "Entrer la quantité "
         },
         "detail": {
             "field": "Champs",

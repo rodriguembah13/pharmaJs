@@ -22,6 +22,8 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Stock.
@@ -85,11 +87,19 @@ public class StockResource {
      * GET  /stocks : get all the stocks.
      *
      * @param pageable the pagination information
+     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of stocks in body
      */
     @GetMapping("/stocks")
     @Timed
-    public ResponseEntity<List<Stock>> getAllStocks(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<Stock>> getAllStocks(@ApiParam Pageable pageable, @RequestParam(required = false) String filter) {
+        if ("medicament-is-null".equals(filter)) {
+            log.debug("REST request to get all Stocks where medicament is null");
+            return new ResponseEntity<>(StreamSupport
+                .stream(stockRepository.findAll().spliterator(), false)
+                .filter(stock -> stock.getMedicament() == null)
+                .collect(Collectors.toList()), HttpStatus.OK);
+        }
         log.debug("REST request to get a page of Stocks");
         Page<Stock> page = stockRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/stocks");

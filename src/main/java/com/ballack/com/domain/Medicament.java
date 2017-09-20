@@ -5,8 +5,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -42,12 +40,9 @@ public class Medicament implements Serializable {
     @ManyToOne
     private FamilleMedicament familleMedicament;
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "medicament_stock",
-               joinColumns = @JoinColumn(name="medicaments_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="stocks_id", referencedColumnName="id"))
-    private Set<Stock> stocks = new HashSet<>();
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Stock stock;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -136,29 +131,17 @@ public class Medicament implements Serializable {
         this.familleMedicament = familleMedicament;
     }
 
-    public Set<Stock> getStocks() {
-        return stocks;
+    public Stock getStock() {
+        return stock;
     }
 
-    public Medicament stocks(Set<Stock> stocks) {
-        this.stocks = stocks;
+    public Medicament stock(Stock stock) {
+        this.stock = stock;
         return this;
     }
 
-    public Medicament addStock(Stock stock) {
-        this.stocks.add(stock);
-        stock.getMedicaments().add(this);
-        return this;
-    }
-
-    public Medicament removeStock(Stock stock) {
-        this.stocks.remove(stock);
-        stock.getMedicaments().remove(this);
-        return this;
-    }
-
-    public void setStocks(Set<Stock> stocks) {
-        this.stocks = stocks;
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

@@ -56,7 +56,7 @@ public class MedicamentService {
     @Transactional(readOnly = true)
     public Medicament findOne(Long id) {
         log.debug("Request to get Medicament : {}", id);
-        return medicamentRepository.findOneWithEagerRelationships(id);
+        return medicamentRepository.findOne(id);
     }
 
     /**

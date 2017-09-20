@@ -96,7 +96,9 @@
             "edit": "Edit",
             "open": "Open",
             "save": "Save",
-            "view": "View"
+            "view": "View",
+            "addPanier": "Add",
+            "titre": "Enter Quantity"
         },
         "detail": {
             "field": "Field",

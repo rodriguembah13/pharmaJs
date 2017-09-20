@@ -29,9 +29,7 @@
         </dd>
         <dt><span data-translate="pharmaApp.medicament.stock">Stock</span></dt>
         <dd>
-            <span ng-repeat="stock in vm.medicament.stocks">
-                <a ui-sref="stock-detail({id: stock.id})">{{stock.libelle}}</a>{{$last ? '' : ', '}}
-            </span>
+            <a ui-sref="stock-detail({id:vm.medicament.stock.id})">{{vm.medicament.stock.id}}</a>
         </dd>
     </dl>
 

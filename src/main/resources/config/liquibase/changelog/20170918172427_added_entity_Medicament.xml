@@ -44,20 +44,11 @@
             <column name="famille_medicament_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-
+            <column name="stock_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
-        <createTable tableName="medicament_stock">
-            <column name="stocks_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="medicaments_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="medicaments_id, stocks_id" tableName="medicament_stock"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

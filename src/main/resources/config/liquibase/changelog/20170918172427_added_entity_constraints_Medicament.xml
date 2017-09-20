@@ -14,16 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="famille_medicament"/>
 
-        <addForeignKeyConstraint baseColumnNames="medicaments_id"
-                                 baseTableName="medicament_stock"
-                                 constraintName="fk_medicament_stock_medicaments_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="medicament"/>
-        <addForeignKeyConstraint baseColumnNames="stocks_id"
-                                 baseTableName="medicament_stock"
-                                 constraintName="fk_medicament_stock_stocks_id"
+        <addForeignKeyConstraint baseColumnNames="stock_id"
+                                 baseTableName="medicament"
+                                 constraintName="fk_medicament_stock_id"
                                  referencedColumnNames="id"
                                  referencedTableName="stock"/>
-        
+
     </changeSet>
 </databaseChangeLog>

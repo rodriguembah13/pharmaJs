@@ -1,0 +1,150 @@
+<div class="row well">
+    <div class="btn-group" uib-dropdown>
+        <button type="button" class="btn btn-danger dropdown pointer" uib-dropdown-toggle>Caisse</button>
+        <ul class="dropdown-menu" uib-dropdown-menu>
+            <li><a href="#">Nouvelle Vente </a></li>
+            <li><a href="#">cloturer vente </a></li>
+        </ul>
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <form class="form-inline" role="form" ng-submit="addLine()">
+                <div class="form-group">
+                    <label class="control-label">Language</label>
+                    <div class="selectContainer">
+                         <select name="medicament" class="form-control" ng-model="codeMed">
+                         <option value=""></option>
+                <option ng-repeat="medicament in vm.medicaments">{{medicament.code}}</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Prix</label>
+                    <input type="text" class="form-control" id="password" ng-model="prix">{{prix}}
+                </div>
+                <div class="form-group">
+                    <label for="password1">Quantite</label>
+                    <input type="text" class="form-control" id="password1" ng-model="qte">
+                </div>
+                <button type="Submit" class="btn btn-default">Submit</button>
+            </form>
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id">Medicament <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="nomComplet">Prix unitaire<span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="adresse">Quantite <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="civilite">Total <span class="glyphicon glyphicon-sort"></span></th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="client in lines">
+                    <td>{{client.codeMedi}}</td>
+                    <td>{{client.prix}}</td>
+                    <td>{{client.quantite}}</td>
+                    <td>{{client.prixTotal}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="libelle"><span>Libelle</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prix"><span>Prix</span> <span class="glyphicon glyphicon-sort"></span></th>
+            
+                    <th jh-sort-by="code"><span>Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="medicament in vm.medicaments track by medicament.id">
+                    <td><a ui-sref="medicament-detail({id:medicament.id})">{{medicament.id}}</a></td>
+                    <td>{{medicament.libelle}}</td>
+                    <td>{{medicament.prix}}</td>
+                
+                    <td>{{medicament.code}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="button"
+                                    ui-sref="caisse.edit({id:medicament.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.addPanier"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+    <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()">
+
+    <!-- table -->
+    <p>Called <code>{{vm.counter}}</code> times</p>
+    <table class="table table-bordered table-hover table-condensed">
+      <tr style="font-weight: bold">
+        <td style="width:40%">Medicament</td>
+        <td style="width:30%">Prix</td>
+        <td style="width:30%">Quantite</td>
+        <td style="width:30%">Total</td>
+        <td style="width:30%"><span ng-show="tableform.$visible">Action</span></td>
+      </tr>
+      <tr ng-repeat="user in lines | filter:filterUser">
+      <td>
+          <!-- editable group (select-remote) -->
+<!--           <span editable-select="user.group" e-form="tableform" onshow="loadGroups()" e-ng-options="g.id as g.libelle for g in vm.medicaments">
+            {{ showGroup(user) }}
+          </span> -->
+    <span editable-ui-select="state" data-e-ng-model="state" data-e-style="min-width:300px;" onbeforesave="vm.onSelectCallback()">
+      {{state.libelle}}
+      <editable-ui-select-match placeholder="State">
+        {{$select.selected.libelle}}
+      </editable-ui-select-match>
+      <editable-ui-select-choices repeat="state in vm.medicaments | filter: $select.search track by $index">
+        {{state.libelle}}
+      </editable-ui-select-choices>
+    </span>
+        </td>
+        <td>
+          <span editable-text="user.prix " e-form="tableform">
+            {{ user.prix || 'empty' }}{{state.prix}}
+          </span>
+        </td>
+        <td>
+          <!-- editable username (text with validation) -->
+          <span editable-text="user.quantite" e-form="tableform" onbeforesave="checkName($data, user.id)">
+            {{ user.quantite || 'empty' }}
+          </span>
+        </td>
+           <td>
+          
+          <span editable-text="user.prixT" e-form="tableform">
+            {{ user.prixT || 'empty' }}
+          </span>
+        </td>
+        <td><button type="button" ng-show="tableform.$visible" ng-click="deleteUser(user.id)" class="btn btn-danger pull-right">Del</button></td>
+      </tr>
+    </table>
+
+    <!-- buttons -->
+    <div class="btn-edit">
+      <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
+        new Vente
+      </button>
+    </div>
+    <div class="btn-form" ng-show="tableform.$visible">
+      <button type="button" ng-disabled="tableform.$waiting" ng-click="addUser()" class="btn btn-default pull-right">add row</button>
+      <button type="submit" ng-disabled="tableform.$waiting" class="btn btn-primary">save</button>
+      <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">cancel</button>
+    </div> 
+    
+  </form>
+</div>
