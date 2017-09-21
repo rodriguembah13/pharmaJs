@@ -137,6 +137,35 @@
                     $state.go('client');
                 });
             }]
+        })        .state('clientcaisse.new', {
+            parent: 'caisse',
+            url: '/new',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/client/client-dialog.html',
+                    controller: 'ClientDialogController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        entity: function () {
+                            return {
+                                nomComplet: null,
+                                adresse: null,
+                                civilite: null,
+                                id: null
+                            };
+                        }
+                    }
+                }).result.then(function() {
+                    $state.go('caisse', null, { reload: 'caisse' });
+                }, function() {
+                    $state.go('caisse');
+                });
+            }]
         })
         .state('client.edit', {
             parent: 'client',

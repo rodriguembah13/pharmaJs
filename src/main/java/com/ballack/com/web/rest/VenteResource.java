@@ -1,5 +1,8 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.domain.LigneVente;
+import com.ballack.com.repository.LigneVenteRepository;
+import com.ballack.com.service.UserService;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.Vente;
 import com.ballack.com.service.VenteService;
@@ -19,8 +22,10 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Vente.
@@ -34,9 +39,13 @@ public class VenteResource {
     private static final String ENTITY_NAME = "vente";
 
     private final VenteService venteService;
+    private final UserService userService;
+    private final LigneVenteRepository ligneVenteRepository;
 
-    public VenteResource(VenteService venteService) {
+    public VenteResource(VenteService venteService, UserService userService, LigneVenteRepository ligneVenteRepository) {
         this.venteService = venteService;
+        this.userService = userService;
+        this.ligneVenteRepository = ligneVenteRepository;
     }
 
     /**
@@ -59,6 +68,43 @@ public class VenteResource {
             .body(result);
     }
 
+    /**
+     * POST  /ventes : Create a new vente.
+     *
+     * @param ligneVentes the vente to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new vente, or with status 400 (Bad Request) if the vente has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/ventesLigne")
+    @Timed
+    public ResponseEntity<Vente> createVenteL(@RequestBody Set<LigneVente> ligneVentes) throws URISyntaxException {
+        Vente vente=new Vente();
+        Double prix_temp=0.0;
+        vente.setDate_vente(LocalDate.now());
+        vente.setUser(userService.getUserWithAuthorities());
+        vente.setLigneVentes(ligneVentes);
+        Vente vente1 = venteService.save(vente);
+        for (LigneVente ligneVente:ligneVentes){
+            prix_temp=prix_temp+(ligneVente.getMedicament().getPrix()*ligneVente.getQuantite());
+            LigneVente ligneVente1=new LigneVente();
+            ligneVente1.setVente(vente1);
+            ligneVente1.setMedicament(ligneVente.getMedicament());
+            ligneVente1.setQuantite(ligneVente.getQuantite());
+            ligneVente1.setPrix(ligneVente.getPrix());
+            ligneVenteRepository.save(ligneVente1);
+            vente.addLigneVente(ligneVente);
+
+        }
+        vente.setPrix(prix_temp);
+        log.debug("REST request to save Vente : {}", vente);
+/*        if (vente.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new vente cannot already have an ID")).body(null);
+        }*/
+        Vente result = venteService.save(vente1);
+        return ResponseEntity.created(new URI("/api/ventes/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
     /**
      * PUT  /ventes : Updates an existing vente.
      *

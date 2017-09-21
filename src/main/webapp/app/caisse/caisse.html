@@ -1,14 +1,39 @@
 <div class="row well">
-    <div class="btn-group" uib-dropdown>
+   <!--  <div class="btn-group" uib-dropdown>
         <button type="button" class="btn btn-danger dropdown pointer" uib-dropdown-toggle>Caisse</button>
         <ul class="dropdown-menu" uib-dropdown-menu>
             <li><a href="#">Nouvelle Vente </a></li>
             <li><a href="#">cloturer vente </a></li>
-        </ul>
-    </div>
+        </ul> --> 
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="caisse.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  >
+                        Create new Client
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="form-group">
+         <div class="input-group">
+            <ui-select allow-clear ng-model="ctrl.person.selected" theme="bootstrap">
+              <ui-select-match placeholder="Select or search a client in the list...">{{$select.selected.nomComplet}}</ui-select-match>
+              <ui-select-choices repeat="item in vm.clients | filter: $select.search">
+                <span ng-bind-html="item.nomComplet| highlight: $select.search">{{item.nomComplet }}</span>
+                
+              </ui-select-choices>
+            </ui-select>
+               <span class="input-group-btn">
+              <button type="button"  ui-sref="caisse.client" class="btn btn-default" uib-tooltip="new client" >
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </span>
+          </div>
 </div>
-<!-- <div class="row">
-    <div class="panel panel-primary">
+</div>
+ <div class="row">
+<!--    <div class="panel panel-primary">
         <div class="panel-body">
             <form class="form-inline" role="form" ng-submit="addLine()">
                 <div class="form-group">
@@ -85,56 +110,66 @@
             </tbody>
         </table>
     </div> -->
-    <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()">
-
-    <!-- table -->
-    <p>Called <code>{{vm.counter}}</code> times</p>
+    <div class="col-lg-6">
+   <!--  <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()"> -->
     <table class="table table-bordered table-hover table-condensed">
       <tr style="font-weight: bold">
         <td style="width:40%">Medicament</td>
-        <td style="width:30%">Prix</td>
+       <!--  <td style="width:30%">Prix</td> -->
         <td style="width:30%">Quantite</td>
-        <td style="width:30%">Total</td>
+       <!--  <td style="width:30%">Total</td> -->
         <td style="width:30%"><span ng-show="tableform.$visible">Action</span></td>
       </tr>
       <tr ng-repeat="user in lines | filter:filterUser">
       <td>
-          <!-- editable group (select-remote) -->
-<!--           <span editable-select="user.group" e-form="tableform" onshow="loadGroups()" e-ng-options="g.id as g.libelle for g in vm.medicaments">
-            {{ showGroup(user) }}
-          </span> -->
-    <span editable-ui-select="state" data-e-ng-model="state" data-e-style="min-width:300px;" onbeforesave="vm.onSelectCallback()">
-      {{state.libelle}}
+
+    <span editable-ui-select="user.medicament" data-e-ng-model="state" data-e-style="min-width:100px;" e-form="tableform">
+      {{user.medicament.libelle}}
       <editable-ui-select-match placeholder="State">
         {{$select.selected.libelle}}
       </editable-ui-select-match>
       <editable-ui-select-choices repeat="state in vm.medicaments | filter: $select.search track by $index">
-        {{state.libelle}}
+        <div ng-bind-html="state.libelle">{{state.libelle}}</div>
+      <small>
+        prix: {{state.prix}}
+      </small>
       </editable-ui-select-choices>
     </span>
         </td>
+        <!-- <td>
+          <span editable-text="user.prix " e-form="tableform" edit-disabled="true">
+            {{user.medicament.prix}}
+          </span>
+        </td> -->
         <td>
-          <span editable-text="user.prix " e-form="tableform">
-            {{ user.prix || 'empty' }}{{state.prix}}
+          <span editable-text="user.quantite" e-form="tableform" onbeforesave="checkName($data, user.id)" e-required>
+            {{ user.quantite}}
           </span>
         </td>
-        <td>
-          <!-- editable username (text with validation) -->
-          <span editable-text="user.quantite" e-form="tableform" onbeforesave="checkName($data, user.id)">
-            {{ user.quantite || 'empty' }}
-          </span>
-        </td>
-           <td>
+<!--            <td>
           
-          <span editable-text="user.prixT" e-form="tableform">
-            {{ user.prixT || 'empty' }}
+          <span editable-text="user.prixTotal" e-form="tableform">
+            ({{user.medicament.prix}})*({{user.quantite}})
           </span>
-        </td>
-        <td><button type="button" ng-show="tableform.$visible" ng-click="deleteUser(user.id)" class="btn btn-danger pull-right">Del</button></td>
+        </td> -->
+      <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="tableform" onaftersave="saveUser($data, user.idL)" ng-show="tableform.$visible" class="form-buttons form-inline" shown="inserted == user">
+          <button type="submit" ng-disabled="tableform$waiting" class="btn btn-primary">
+           <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">
+           <span class="glyphicon glyphicon-move"></span>
+          </button>
+        </form>
+        <div class="buttons" ng-show="!tableform.$visible">
+          <button type="button" class="btn btn-primary" ng-click="tableform.$show()">edit</button>
+          <button type="button" class="btn btn-danger" ng-click="removeUser($index)">del</button>
+        </div>  
+      </td>
       </tr>
-    </table>
-
-    <!-- buttons -->
+    </table><button type="button" class="btn btn-default" ng-click="addUser()">Add row</button>
+<!-- 
     <div class="btn-edit">
       <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
         new Vente
@@ -146,5 +181,15 @@
       <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">cancel</button>
     </div> 
     
-  </form>
+  </form>--> 
+  </div>
+  <div class="col-lg-6 bg-info">
+     <ul class="list-group" >
+  <li ng-repeat=" user in lines" class="list-group-item">
+    <pre> Medicament:<span class="badge badge-info">{{ user.medicament.libelle }}</span>Prix:<span class="badge bg-danger">{{ user.medicament.prix }}</span> Quantite:<span class="badge bg-danger">{{ user.quantite}}</span> Prix Total:<span class="badge bg-danger">{{ user.quantite}}*{{ user.medicament.prix }}</span>
+      </pre>
+    </li>
+</ul> 
+<button type="button" class="btn btn-primary" ng-click="saveTable()">save</button><button type="button" class="btn btn-danger" ng-click="cancel()">cancel</button>
+  </div>
 </div>

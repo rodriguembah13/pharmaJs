@@ -3,7 +3,9 @@ package com.ballack.com.web.rest;
 import com.ballack.com.PharmaApp;
 
 import com.ballack.com.domain.Vente;
+import com.ballack.com.repository.LigneVenteRepository;
 import com.ballack.com.repository.VenteRepository;
+import com.ballack.com.service.UserService;
 import com.ballack.com.service.VenteService;
 import com.ballack.com.web.rest.errors.ExceptionTranslator;
 
@@ -54,7 +56,10 @@ public class VenteResourceIntTest {
 
     @Autowired
     private VenteService venteService;
-
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private LigneVenteRepository ligneVenteRepository;
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
@@ -74,7 +79,7 @@ public class VenteResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final VenteResource venteResource = new VenteResource(venteService);
+        final VenteResource venteResource = new VenteResource(venteService, userService, ligneVenteRepository);
         this.restVenteMockMvc = MockMvcBuilders.standaloneSetup(venteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
