@@ -4,6 +4,7 @@ import com.ballack.com.PharmaApp;
 
 import com.ballack.com.domain.Vente;
 import com.ballack.com.repository.LigneVenteRepository;
+import com.ballack.com.repository.StockRepository;
 import com.ballack.com.repository.VenteRepository;
 import com.ballack.com.service.UserService;
 import com.ballack.com.service.VenteService;
@@ -71,7 +72,8 @@ public class VenteResourceIntTest {
 
     @Autowired
     private EntityManager em;
-
+    @Autowired
+    private StockRepository stockRepository;
     private MockMvc restVenteMockMvc;
 
     private Vente vente;
@@ -79,7 +81,7 @@ public class VenteResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final VenteResource venteResource = new VenteResource(venteService, userService, ligneVenteRepository);
+        final VenteResource venteResource = new VenteResource(venteService, userService, ligneVenteRepository, stockRepository);
         this.restVenteMockMvc = MockMvcBuilders.standaloneSetup(venteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

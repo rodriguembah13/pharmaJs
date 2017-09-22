@@ -20,7 +20,7 @@
                 <span class="glyphicon glyphicon-plus"></span>
               </button>
             </span>
-          </div>{{NoItemError}}
+          </div>
 </div>
 </div>
  <div class="row">
@@ -105,18 +105,18 @@
    <!--  <form editable-form name="tableform" onaftersave="saveTable()" oncancel="cancel()"> -->
     <table class="table table-bordered table-hover table-condensed">
       <tr style="font-weight: bold">
-        <td style="width:40%">Medicament</td>
+        <td style="width:50%">Medicament</td>
        <!--  <td style="width:30%">Prix</td> -->
         <td style="width:30%">Quantite</td>
        <!--  <td style="width:30%">Total</td> -->
-        <td style="width:30%"><span ng-show="tableform.$visible">Action</span></td>
+        <td style="width:20%"><span ng-show="tableform.$visible">Action</span></td>
       </tr>
       <tr ng-repeat="user in lines | filter:filterUser">
       <td>
 
-    <span editable-ui-select="user.medicament" data-e-ng-model="state" data-e-style="min-width:100px;" e-form="tableform">
+    <span editable-ui-select="user.medicament" data-e-ng-model="state" data-e-style="min-width:140px;" e-form="tableform">
       {{user.medicament.libelle}}
-      <editable-ui-select-match placeholder="State">
+      <editable-ui-select-match placeholder="Choisir Medicament">
         {{$select.selected.libelle}}
       </editable-ui-select-match>
       <editable-ui-select-choices repeat="state in vm.medicaments | filter: $select.search track by $index">

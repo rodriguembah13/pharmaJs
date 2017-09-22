@@ -1,6 +1,7 @@
 package com.ballack.com.web.rest;
 
 import com.ballack.com.domain.LigneVente;
+import com.ballack.com.domain.Stock;
 import com.ballack.com.repository.LigneVenteRepository;
 import com.ballack.com.repository.StockRepository;
 import com.ballack.com.service.UserService;
@@ -42,12 +43,13 @@ public class VenteResource {
     private final VenteService venteService;
     private final UserService userService;
     private final LigneVenteRepository ligneVenteRepository;
+    private final StockRepository stockRepository;
 
-
-    public VenteResource(VenteService venteService, UserService userService, LigneVenteRepository ligneVenteRepository) {
+    public VenteResource(VenteService venteService, UserService userService, LigneVenteRepository ligneVenteRepository, StockRepository stockRepository) {
         this.venteService = venteService;
         this.userService = userService;
         this.ligneVenteRepository = ligneVenteRepository;
+        this.stockRepository = stockRepository;
     }
 
     /**
@@ -95,12 +97,14 @@ public class VenteResource {
             ligneVente1.setPrix(ligneVente.getMedicament().getPrix());
             ligneVente1.setClient(ligneVente.getClient());
             ligneVente1.getMedicament().getStock().setQuantite(ligneVente1.getMedicament().getStock().getQuantite()-ligneVente1.getQuantite());
-            ligneVenteRepository.save(ligneVente1);
+            LigneVente ligneVente2=  ligneVenteRepository.save(ligneVente1);
             vente.addLigneVente(ligneVente);
             if(vente1.getClient()==null){
                 vente1.setClient(ligneVente1.getClient());
             }
-
+            Stock stock =stockRepository.findOne(ligneVente2.getMedicament().getId());
+            stock.setQuantite(stock.getQuantite()-ligneVente2.getQuantite());
+            stockRepository.saveAndFlush(stock);
         }
         vente.setPrix(prix_temp);
         log.debug("REST request to save Vente : {}", vente);
@@ -108,7 +112,7 @@ public class VenteResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new vente cannot already have an ID")).body(null);
         }*/
         Vente result = venteService.save(vente1);
-        return ResponseEntity.created(new URI("/api/ventes/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/ventesLigne/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
