@@ -12,8 +12,10 @@
     	// vm.ligneVente = entity;
     	$scope.lines = [];
     	$scope.visible =false;
+    	$scope.cl =null;
 		loadAll ();
 		loadAllClient ();
+		vm.country = {};
         $scope.addLine = function () {
             $scope.lines.push({quantite:$scope.qte,
             					prix:$scope.prix,
@@ -48,7 +50,7 @@ $scope.removeUser = function(index) {
     $scope.lines.push({
       //idL: $scope.lines.length+1,
       medicament: null,
-      //prix: null,
+      client: vm.country,
       quantite: null,
       //prixTotal:null
     });

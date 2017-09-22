@@ -5,9 +5,9 @@
         .module('pharmaApp')
         .controller('LigneVenteDialogController', LigneVenteDialogController);
 
-    LigneVenteDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'LigneVente', 'Medicament', 'Vente'];
+    LigneVenteDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'LigneVente', 'Medicament', 'Vente', 'Client'];
 
-    function LigneVenteDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, LigneVente, Medicament, Vente) {
+    function LigneVenteDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, LigneVente, Medicament, Vente, Client) {
         var vm = this;
 
         vm.ligneVente = entity;
@@ -15,6 +15,7 @@
         vm.save = save;
         vm.medicaments = Medicament.query();
         vm.ventes = Vente.query();
+        vm.clients = Client.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

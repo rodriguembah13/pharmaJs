@@ -5,19 +5,10 @@
             <li><a href="#">Nouvelle Vente </a></li>
             <li><a href="#">cloturer vente </a></li>
         </ul> --> 
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="caisse.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  >
-                        Create new Client
-                    </span>
-                </button>
-            </div>
-        </div>
+        
         <div class="form-group">
          <div class="input-group">
-            <ui-select allow-clear ng-model="ctrl.person.selected" theme="bootstrap">
+            <ui-select allow-clear ng-model="vm.country" theme="bootstrap">
               <ui-select-match placeholder="Select or search a client in the list...">{{$select.selected.nomComplet}}</ui-select-match>
               <ui-select-choices repeat="item in vm.clients | filter: $select.search">
                 <span ng-bind-html="item.nomComplet| highlight: $select.search">{{item.nomComplet }}</span>
@@ -25,11 +16,11 @@
               </ui-select-choices>
             </ui-select>
                <span class="input-group-btn">
-              <button type="button"  ui-sref="caisse.client" class="btn btn-default" uib-tooltip="new client" >
+              <button type="button"  ui-sref="caisse.new" class="btn btn-default" uib-tooltip="new client" >
                 <span class="glyphicon glyphicon-plus"></span>
               </button>
             </span>
-          </div>
+          </div>{{NoItemError}}
 </div>
 </div>
  <div class="row">

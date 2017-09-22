@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="vente"/>
 
+        <addForeignKeyConstraint baseColumnNames="client_id"
+                                 baseTableName="ligne_vente"
+                                 constraintName="fk_ligne_vente_client_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="client"/>
+
     </changeSet>
 </databaseChangeLog>

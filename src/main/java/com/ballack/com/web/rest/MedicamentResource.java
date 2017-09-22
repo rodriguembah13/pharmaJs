@@ -53,7 +53,9 @@ public class MedicamentResource {
         if (medicament.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new medicament cannot already have an ID")).body(null);
         }
+
         Medicament result = medicamentService.save(medicament);
+
         return ResponseEntity.created(new URI("/api/medicaments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -75,7 +77,7 @@ public class MedicamentResource {
         if (medicament.getId() == null) {
             return createMedicament(medicament);
         }
-        Medicament result = medicamentService.save(medicament);
+        Medicament result = medicamentService.saveAndF(medicament);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, medicament.getId().toString()))
             .body(result);

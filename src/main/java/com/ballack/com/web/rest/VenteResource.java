@@ -2,6 +2,7 @@ package com.ballack.com.web.rest;
 
 import com.ballack.com.domain.LigneVente;
 import com.ballack.com.repository.LigneVenteRepository;
+import com.ballack.com.repository.StockRepository;
 import com.ballack.com.service.UserService;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.Vente;
@@ -41,6 +42,7 @@ public class VenteResource {
     private final VenteService venteService;
     private final UserService userService;
     private final LigneVenteRepository ligneVenteRepository;
+
 
     public VenteResource(VenteService venteService, UserService userService, LigneVenteRepository ligneVenteRepository) {
         this.venteService = venteService;
@@ -90,9 +92,14 @@ public class VenteResource {
             ligneVente1.setVente(vente1);
             ligneVente1.setMedicament(ligneVente.getMedicament());
             ligneVente1.setQuantite(ligneVente.getQuantite());
-            ligneVente1.setPrix(ligneVente.getPrix());
+            ligneVente1.setPrix(ligneVente.getMedicament().getPrix());
+            ligneVente1.setClient(ligneVente.getClient());
+            ligneVente1.getMedicament().getStock().setQuantite(ligneVente1.getMedicament().getStock().getQuantite()-ligneVente1.getQuantite());
             ligneVenteRepository.save(ligneVente1);
             vente.addLigneVente(ligneVente);
+            if(vente1.getClient()==null){
+                vente1.setClient(ligneVente1.getClient());
+            }
 
         }
         vente.setPrix(prix_temp);

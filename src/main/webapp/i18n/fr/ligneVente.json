@@ -18,7 +18,8 @@
             "quantite": "Quantite",
             "prix": "Prix",
             "medicament": "Medicament",
-            "vente": "Vente"
+            "vente": "Vente",
+            "client": "Client"
         }
     }
 }

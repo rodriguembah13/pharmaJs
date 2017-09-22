@@ -33,6 +33,9 @@ public class LigneVente implements Serializable {
     @ManyToOne
     private Vente vente;
 
+    @ManyToOne
+    private Client client;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -92,6 +95,19 @@ public class LigneVente implements Serializable {
 
     public void setVente(Vente vente) {
         this.vente = vente;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public LigneVente client(Client client) {
+        this.client = client;
+        return this;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

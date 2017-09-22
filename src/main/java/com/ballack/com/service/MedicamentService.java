@@ -1,7 +1,9 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.Medicament;
+import com.ballack.com.domain.Stock;
 import com.ballack.com.repository.MedicamentRepository;
+import com.ballack.com.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,8 +22,10 @@ public class MedicamentService {
     private final Logger log = LoggerFactory.getLogger(MedicamentService.class);
 
     private final MedicamentRepository medicamentRepository;
-    public MedicamentService(MedicamentRepository medicamentRepository) {
+    private final StockRepository stockRepository;
+    public MedicamentService(MedicamentRepository medicamentRepository, StockRepository stockRepository) {
         this.medicamentRepository = medicamentRepository;
+        this.stockRepository = stockRepository;
     }
 
     /**
@@ -31,10 +35,26 @@ public class MedicamentService {
      * @return the persisted entity
      */
     public Medicament save(Medicament medicament) {
+        Stock stock=new Stock();
+        stock.setQuantite(0);
+        stock.setLibelle("st_"+medicament.getCode());
+        stock.setAlertQuantite(10);
+        Stock stock1=stockRepository.save(stock);
+        medicament.setStock(stock1);
         log.debug("Request to save Medicament : {}", medicament);
         return medicamentRepository.save(medicament);
     }
+    /**
+     * Save a medicament.
+     *
+     * @param medicament the entity to save
+     * @return the persisted entity
+     */
+    public Medicament saveAndF(Medicament medicament) {
 
+        log.debug("Request to save Medicament : {}", medicament);
+        return medicamentRepository.saveAndFlush(medicament);
+    }
     /**
      *  Get all the medicaments.
      *

@@ -38,6 +38,12 @@
                 <option value=""></option>
             </select>
         </div>
+        <div class="form-group">
+            <label data-translate="pharmaApp.ligneVente.client" for="field_client">Client</label>
+            <select class="form-control" id="field_client" name="client" ng-model="vm.ligneVente.client" ng-options="client as client.id for client in vm.clients track by client.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

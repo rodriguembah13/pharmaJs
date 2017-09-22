@@ -23,6 +23,7 @@
                     <th jh-sort-by="prix"><span data-translate="pharmaApp.ligneVente.prix">Prix</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="medicament.code"><span data-translate="pharmaApp.ligneVente.medicament">Medicament</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="vente.id"><span data-translate="pharmaApp.ligneVente.vente">Vente</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="client.id"><span data-translate="pharmaApp.ligneVente.client">Client</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -36,6 +37,9 @@
                     </td>
                     <td>
                         <a ui-sref="vente-detail({id:ligneVente.vente.id})">{{ligneVente.vente.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="client-detail({id:ligneVente.client.id})">{{ligneVente.client.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
